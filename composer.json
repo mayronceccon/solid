@@ -1,0 +1,16 @@
+{
+    "name": "mayronceccon/principio_solid",
+    "description": "Utilização dos principios SOLID para aprendizado",
+    "authors": [
+        {
+            "name": "Mayron Ceccon",
+            "email": "mayron.ceccon@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "MTC\\" : "src/MTC/"
+        }
+    }
+}
