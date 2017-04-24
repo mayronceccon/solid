@@ -3,19 +3,14 @@
 namespace MTC\Fichas;
 
 use MTC\Fichas\Interfaces\IExportarFichas;
-use MTC\Fichas\Fichas;
+use MTC\Fichas\Interfaces\IFichas;
 
 class ExportarFichasJSON implements IExportarFichas
 {
-    public function exportar(Fichas $ficha)
+    public function exportar(IFichas $ficha)
     {
         header("Content-type:application/json");
-        
-        $ficha = array('ficha' => array(
-            'cpf' => $ficha->getCpf(),
-            'nome' => $ficha->getNome()
-        ));
-
-        echo json_encode($ficha);
+        $dados = $ficha->getDados();
+        echo json_encode($dados);
     }
 }

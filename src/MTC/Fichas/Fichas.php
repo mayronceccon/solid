@@ -3,49 +3,21 @@
 namespace MTC\Fichas;
 
 use MTC\Fichas\Interfaces\IFichas;
-use MTC\CpfService;
+use MTC\Fichas\Interfaces\IExportarFichas;
 
-class Fichas implements IFichas
+abstract class Fichas
 {
-    private $cpf;
-    private $nome;
-    private $renavam;
+    public abstract function inserir(IFichas $ficha);
 
-    public function setCpf($cpf)
+    public abstract function finalizar(IFichas $ficha);
+
+    public function consultar(IFichas $ficha)
     {
-        $this->cpf = $cpf;
+        return $ficha->getDados();
     }
 
-    public function setNome($nome)
+    public function exportar(IFichas $ficha, IExportarFichas $tipo)
     {
-        $this->nome = $nome;
-    }
-
-    public function setRenavam($renavam)
-    {
-        $this->renavam = $renavam;
-    }
-
-    public function getCpf()
-    {
-        return $this->cpf;
-    }
-
-    public function getNome()
-    {
-        return $this->nome;
-    }
-
-    public function getRenavam()
-    {
-        return $this->renavam;
-    }
-
-    public function isValid()
-    {
-        if (!CpfService::isValid($this->getCpf())) {
-            return false;
-        }
-        return true;
+        echo $tipo->exportar($ficha);
     }
 }

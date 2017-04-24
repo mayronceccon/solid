@@ -3,13 +3,15 @@
 namespace MTC\Fichas;
 
 use MTC\Fichas\Interfaces\IExportarFichas;
-use MTC\Fichas\Fichas;
+use MTC\Fichas\Interfaces\IFichas;
 
 class ExportarFichasTXT implements IExportarFichas
 {
-    public function exportar(Fichas $ficha)
+    public function exportar(IFichas $ficha)
     {
-        echo "CPF: " . $ficha->getCpf() . "<br/>";
-        echo "NOME: " . $ficha->getNome() . "<br/>";
+        $dados = $ficha->getDados();
+        foreach ($dados['ficha'] as $chave => $dado) {
+            echo "{$chave}: " . $dado . "<br/>";
+        }
     }
 }

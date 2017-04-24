@@ -1,17 +1,49 @@
 <?php
 
 namespace MTC\Fichas;
-use MTC\Fichas\FichasGeral;
-use MTC\Interfaces\IFichas;
 
-class FichasMotoristas extends FichasGeral
+use MTC\CpfService;
+use MTC\Fichas\Interfaces\IFichas;
+
+class FichasMotoristas implements IFichas
 {
-    public function inserir(IFichas $ficha)
+    private $cpf;
+    private $nome;
+
+    public function setCpf($cpf)
     {
-        if ($ficha->isValid()) {
-            //echo "INSERIR FICHA MOTORISTA<br/><br/>";
-        } else {
-            //echo "NÃO PODE INSERIR FICHA<br/><br/>";
+        $this->cpf = $cpf;
+    }
+
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }  
+
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
+
+    public function getNome()
+    {
+        return $this->nome;
+    }   
+
+    public function isValid()
+    {
+        if (!CpfService::isValid($this->getCpf())) {
+            return false;
         }
+        return true;
+    }
+
+    public function getDados()
+    {
+        $ficha = array('ficha' => array(
+            'cpf' => $this->getCpf(),
+            'nome' => $this->getNome()
+        ));
+        return $ficha;
     }
 }
